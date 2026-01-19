@@ -59,12 +59,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(height: 40),
             
             // Interaction Button
-            ElevatedButton.icon(
-              onPressed: _toggleState,
-              icon: const Icon(Icons.touch_app),
-              label: const Text('Toggle Status'),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+            Tooltip(
+              message: 'Click to change status',
+              child: ElevatedButton.icon(
+                onPressed: _toggleState,
+                icon: const Icon(Icons.touch_app),
+                label: const Text('Toggle Status'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                ),
               ),
             ),
           ],
