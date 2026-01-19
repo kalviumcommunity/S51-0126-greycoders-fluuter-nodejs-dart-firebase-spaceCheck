@@ -129,19 +129,12 @@ Type-specific fields (e.g., `capacity`, `pricing`, `equipment`, `slots`) may be 
 
 ```
 lib/
-├── auth/
-│   ├── login_screen.dart
-│   └── signup_screen.dart
-├── dashboard/
-│   ├── dashboard_screen.dart
-│   └── space_card.dart
-├── spaces/
-│   ├── space_detail_screen.dart
-│   └── space_models.dart
-├── services/
-│   ├── auth_service.dart
-│   └── firestore_service.dart
-└── main.dart
+├── models/            # Data structures and classes
+├── screens/           # Individual UI screens (e.g., WelcomeScreen)
+├── services/          # API and Firebase logic
+├── widgets/           # Resusable UI components
+├── utils/             # Helper functions and constants
+└── main.dart          # Application entry point
 ```
 
 ---
@@ -149,23 +142,26 @@ lib/
 ## Setup & Installation
 
 ### Prerequisites
-- Flutter SDK
+- Flutter SDK (verified with `flutter doctor`)
 - Firebase account
-- Android Studio or VS Code
+- Android Studio or VS Code with Flutter extensions
 
 ### Steps
-1. Clone the repository.
-2. Create a Firebase project and enable:
-	 - Email/Password Authentication
-	 - Cloud Firestore
-3. Add Firebase config files:
-	 - Download `google-services.json` and place it in `android/app/`.
-4. Run the app:
+1. **Clone the repository.**
+2. **Install dependencies:**
+    ```bash
+    flutter pub get
+    ```
+3. **Run the app:**
+    Connect a device or start an emulator, then run:
+    ```bash
+    flutter run
+    ```
+    *Ensure you see the "Welcome to GreyScaler" screen.*
 
-```bash
-flutter pub get
-flutter run
-```
+4. **Firebase Setup (Future):**
+    - Create a Firebase project.
+    - Add `google-services.json` to `android/app/`.
 
 ---
 
@@ -174,7 +170,21 @@ flutter run
 - Feature work happens on short-lived branches.
 - Firestore schema changes must be reviewed before merging.
 - UI changes should preserve the base space model to avoid breaking clients.
-- Sprint-I prioritizes correctness over feature depth.
+
+### Naming Conventions
+- **Files**: `lower_snake_case` (e.g., `welcome_screen.dart`)
+- **Classes**: `UpperCamelCase` (e.g., `WelcomeScreen`)
+- **Variables**: `lowerCamelCase` (e.g., `isActive`)
+- **Directories**: `lower_snake_case` (e.g., `screens`, `widgets`)
+
+### Sprint 2 Reflection
+- **Learning**: Gained hands-on experience with Flutter's widget tree (`Scaffold`, `Column`, `StatefulWidget`).
+- **Structure**: Understanding how standardizing folders (`screens`, `widgets`) helps in managing code as the app scales.
+- **State**: Basic state management using `setState` to make the UI interactive.
+
+## Demo
+![App Screenshot](screenshot_placeholder.png)
+*Screenshot of the running Welcome Screen*
 
 ---
 
