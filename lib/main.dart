@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/welcome_screen.dart';
 import 'utils/app_theme.dart';
 
 void main() {
@@ -14,11 +15,7 @@ class GreyscalerApp extends StatelessWidget {
       title: 'Greyscaler',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme, // Applied our custom dark theme
-      home: const Scaffold(
-        body: Center(
-          child: Text('Greyscaler Setup Complete'),
-        ),
-      ),
+      home: const WelcomeScreen(),
     );
   }
 }
