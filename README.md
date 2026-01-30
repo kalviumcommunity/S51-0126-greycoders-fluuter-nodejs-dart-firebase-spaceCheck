@@ -222,6 +222,6 @@ Please:
 
 ## License
 
-This project is currently unlicensed and intended for internal or experimental use. Add a license before public distribution.
+This project is currently unlicensed and intended for internal or experimental use. Add a license before public distribution @2026.
 
 ---
