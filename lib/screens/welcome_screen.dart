@@ -8,6 +8,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  static const String _welcomeMessage = 'Hello, Resident!';
   // State variable to toggle
   bool _isActive = false;
   Color _iconColor = Colors.blue;
