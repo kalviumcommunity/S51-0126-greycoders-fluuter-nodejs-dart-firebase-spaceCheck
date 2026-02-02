@@ -1,8 +1,10 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    // The Flutter Gradle Plugin
     id("dev.flutter.flutter-gradle-plugin")
+    // Google Services Plugin (Connects to Firebase)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -11,20 +13,21 @@ android {
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "1.8"
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // Ensure this matches the package name in your google-services.json
         applicationId = "com.example.grey_scaler"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        
+        // Firestore requires a minimum SDK of 21. If flutter.minSdkVersion is lower, 
+        // you may need to hardcode `minSdk = 21` here.
+        minSdk = flutter.minSdkVersion 
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -32,13 +35,18 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // specific signing config for release
             signingConfig = signingConfigs.getByName("debug")
         }
     }
 }
 
-flutter {
-    source = "../.."
-}
+dependencies {
+    // 1. Firebase BoM (Bill of Materials) - Manages versions for you
+    implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
+
+    // 2. Firebase Products (No version numbers needed because of BoM)
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+} 
