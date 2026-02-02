@@ -87,6 +87,21 @@ class AppTheme {
         ),
       ),
 
+      // Dialog Theme
+      dialogTheme: DialogThemeData(
+        backgroundColor: AppColors.surfaceDark,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        titleTextStyle: GoogleFonts.outfit(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: AppColors.textPrimary,
+        ),
+        contentTextStyle: GoogleFonts.inter(
+          fontSize: 16,
+          color: AppColors.textSecondary,
+        ),
+      ),
+
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
