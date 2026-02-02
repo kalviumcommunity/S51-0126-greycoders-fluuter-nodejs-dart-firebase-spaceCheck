@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Helper to check if user is accessing their own document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      allow read: if isAuthenticated(); // Authenticated users can read user profiles (e.g. for checking who occupied a space)
+      allow create: if isOwner(userId); // Users can only create their own profile
+      allow update: if isOwner(userId); // Users can update only their own profile
+      // No delete for now
+    }
+
+    // Spaces Collection
+    match /spaces/{spaceId} {
+      allow read: if isAuthenticated(); // Any logged-in user can view spaces
+      
+      // Allow updates for check-in/check-out (modifying currentOccupancy, status, occupiedBy, occupiedSince, lastUpdatedAt)
+      // We rely on the app logic for complex validation, but here we ensure they are logged in.
+      // Future improvement: Validate 'currentOccupancy' logic (increment/decrement by 1)
+      allow update: if isAuthenticated(); 
+      
+      // Only admins should create/delete spaces (Assuming admin claim or separate logic, restricted for now)
+      allow create, delete: if false; 
+    }
+  }
+}
