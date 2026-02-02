@@ -9,7 +9,7 @@ class AppTheme {
       brightness: Brightness.dark,
       primaryColor: AppColors.primary,
       scaffoldBackgroundColor: AppColors.scaffoldDark,
-      
+
       // Color Scheme
       colorScheme: const ColorScheme.dark(
         primary: AppColors.primary,
@@ -72,7 +72,7 @@ class AppTheme {
         ),
         iconTheme: const IconThemeData(color: AppColors.textPrimary),
       ),
-      
+
       // Button Themes
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -83,10 +83,18 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: GoogleFonts.inter(
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: GoogleFonts.inter(fontWeight: FontWeight.w600),
         ),
+      ),
+
+      // Radio Theme
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.primary;
+          }
+          return null; // Use default
+        }),
       ),
     );
   }
