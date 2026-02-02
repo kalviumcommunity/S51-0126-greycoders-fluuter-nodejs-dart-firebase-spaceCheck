@@ -28,6 +28,13 @@ class DatabaseService {
     });
   }
 
+  // Single Space Stream
+  Stream<SpaceModel> getSpace(String id) {
+    return spacesCollection.doc(id).snapshots().map((doc) {
+      return SpaceModel.fromFirestore(doc);
+    });
+  }
+
   // Check In Transaction
   Future<void> checkIn(String spaceId, String userId) async {
     return _db.runTransaction((transaction) async {
