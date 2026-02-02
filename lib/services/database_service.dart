@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../models/user_model.dart';
+import '../models/space_model.dart';
 
 class DatabaseService {
   // Singleton pattern
@@ -19,6 +20,13 @@ class DatabaseService {
   // Collection References
   CollectionReference get usersCollection => _db.collection('users');
   CollectionReference get spacesCollection => _db.collection('spaces');
+
+  // Spaces Stream
+  Stream<List<SpaceModel>> getSpaces() {
+    return spacesCollection.snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) => SpaceModel.fromFirestore(doc)).toList();
+    });
+  }
 
   // Create User
   Future<void> createUser({
