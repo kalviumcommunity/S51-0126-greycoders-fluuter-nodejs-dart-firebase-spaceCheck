@@ -28,6 +28,47 @@ class DatabaseService {
     });
   }
 
+  // Check In Transaction
+  Future<void> checkIn(String spaceId, String userId) async {
+    return _db.runTransaction((transaction) async {
+      DocumentReference spaceRef = spacesCollection.doc(spaceId);
+      DocumentSnapshot spaceSnapshot = await transaction.get(spaceRef);
+
+      if (!spaceSnapshot.exists) {
+        throw Exception("Space does not exist!");
+      }
+
+      SpaceModel space = SpaceModel.fromFirestore(spaceSnapshot);
+
+      if (space.status == 'closed') {
+        throw Exception("Space is closed currently.");
+      }
+
+      if (space.currentOccupancy >= space.maxCapacity) {
+        throw Exception("Space is at full capacity!");
+      }
+
+      // Check if user is already checked in? (Basic logic for now)
+      // Ideally we'd check a logs collection, but for this PR we update the Space doc.
+      
+      int newOccupancy = space.currentOccupancy + 1;
+      String newStatus = space.status;
+      if (newOccupancy >= space.maxCapacity) {
+        newStatus = 'occupied'; // Full
+      }
+
+      transaction.update(spaceRef, {
+        'currentOccupancy': newOccupancy,
+        'status': newStatus,
+        'lastUpdatedAt': FieldValue.serverTimestamp(),
+        // Only set occupiedBy if it's a single-user space or tracked logic requires it
+        // For simple shared spaces, we might skip overwriting occupiedBy unless appropriate
+        if (space.maxCapacity == 1) 'occupiedBy': userId,
+        if (newOccupancy == 1) 'occupiedSince': FieldValue.serverTimestamp(),
+      });
+    });
+  }
+
   // Create User
   Future<void> createUser({
     required String name,
