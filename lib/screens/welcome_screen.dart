@@ -8,6 +8,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  static const String _welcomeMessage = 'Hello, Resident!';
   // State variable to toggle
   bool _isActive = false;
   Color _iconColor = Colors.blue;
@@ -17,6 +18,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       _isActive = !_isActive;
       _iconColor = _isActive ? Colors.green : Colors.blue;
     });
+  }
+
+  Widget _buildToggleButton() {
+    return Tooltip(
+      message: 'Click to change status',
+      child: ElevatedButton.icon(
+        onPressed: _toggleState,
+        icon: const Icon(Icons.touch_app),
+        label: const Text('Toggle Status'),
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+        ),
+      ),
+    );
   }
 
   @override
@@ -33,43 +48,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             // Title
             const Text(
               'Hello, Resident!',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
-            
+
             // Image/Icon
-            Icon(
-              Icons.home_work_rounded,
-              size: 100,
-              color: _iconColor,
-            ),
+            Icon(Icons.home_work_rounded, size: 100, color: _iconColor),
             const SizedBox(height: 20),
-            
+
             // State display
-            Text(
-              _isActive ? 'Status: Active' : 'Status: Inactive',
-              style: TextStyle(
-                fontSize: 18,
-                color: _isActive ? Colors.green : Colors.grey,
-              ),
-            ),
+            // State display
+            _buildStatusText(),
             const SizedBox(height: 40),
-            
+
             // Interaction Button
-            Tooltip(
-              message: 'Click to change status',
-              child: ElevatedButton.icon(
-                onPressed: _toggleState,
-                icon: const Icon(Icons.touch_app),
-                label: const Text('Toggle Status'),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                ),
-              ),
-            ),
+            // Interaction Button
+            _buildToggleButton(),
           ],
         ),
       ),
