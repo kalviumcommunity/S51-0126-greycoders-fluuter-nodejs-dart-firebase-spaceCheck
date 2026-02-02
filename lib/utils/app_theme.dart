@@ -9,7 +9,7 @@ class AppTheme {
       brightness: Brightness.dark,
       primaryColor: AppColors.primary,
       scaffoldBackgroundColor: AppColors.scaffoldDark,
-      
+
       // Color Scheme
       colorScheme: const ColorScheme.dark(
         primary: AppColors.primary,
@@ -72,7 +72,7 @@ class AppTheme {
         ),
         iconTheme: const IconThemeData(color: AppColors.textPrimary),
       ),
-      
+
       // Button Themes
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -83,10 +83,15 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: GoogleFonts.inter(
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: GoogleFonts.inter(fontWeight: FontWeight.w600),
         ),
+      ),
+
+      // Divider Theme
+      dividerTheme: const DividerThemeData(
+        color: Color(0xFF2C2C2C),
+        thickness: 1,
+        space: 1,
       ),
     );
   }
