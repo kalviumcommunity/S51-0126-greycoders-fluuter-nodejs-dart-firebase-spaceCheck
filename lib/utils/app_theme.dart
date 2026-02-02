@@ -106,6 +106,13 @@ class AppTheme {
         labelStyle: GoogleFonts.inter(color: AppColors.textSecondary),
         hintStyle: GoogleFonts.inter(color: AppColors.textCaption),
       ),
+
+      // Divider Theme
+      dividerTheme: const DividerThemeData(
+        color: Color(0xFF2C2C2C),
+        thickness: 1,
+        space: 1,
+      ),
     );
   }
 }
