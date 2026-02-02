@@ -9,7 +9,7 @@ class AppTheme {
       brightness: Brightness.dark,
       primaryColor: AppColors.primary,
       scaffoldBackgroundColor: AppColors.scaffoldDark,
-      
+
       // Color Scheme
       colorScheme: const ColorScheme.dark(
         primary: AppColors.primary,
@@ -72,7 +72,7 @@ class AppTheme {
         ),
         iconTheme: const IconThemeData(color: AppColors.textPrimary),
       ),
-      
+
       // Button Themes
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -83,10 +83,24 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: GoogleFonts.inter(
-            fontWeight: FontWeight.w600,
-          ),
+          textStyle: GoogleFonts.inter(fontWeight: FontWeight.w600),
         ),
+      ),
+
+      // Switch Theme
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.primary;
+          }
+          return null; // Use default
+        }),
+        trackColor: MaterialStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.primary.withOpacity(0.5);
+          }
+          return null; // Use default
+        }),
       ),
     );
   }
