@@ -20,12 +20,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     });
   }
 
-  Widget _buildStatusText() {
-    return Text(
-      _isActive ? 'Status: Active' : 'Status: Inactive',
-      style: TextStyle(
-        fontSize: 18,
-        color: _isActive ? Colors.green : Colors.grey,
+  Widget _buildToggleButton() {
+    return Tooltip(
+      message: 'Click to change status',
+      child: ElevatedButton.icon(
+        onPressed: _toggleState,
+        icon: const Icon(Icons.touch_app),
+        label: const Text('Toggle Status'),
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+        ),
       ),
     );
   }
@@ -58,20 +62,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(height: 40),
 
             // Interaction Button
-            Tooltip(
-              message: 'Click to change status',
-              child: ElevatedButton.icon(
-                onPressed: _toggleState,
-                icon: const Icon(Icons.touch_app),
-                label: const Text('Toggle Status'),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 30,
-                    vertical: 15,
-                  ),
-                ),
-              ),
-            ),
+            // Interaction Button
+            _buildToggleButton(),
           ],
         ),
       ),
