@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import '../../utils/app_colors.dart';
-import 'register_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text('Create Account')),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -24,29 +26,25 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Logo or Icon
               const Icon(
-                Icons.security_rounded,
+                Icons.person_add_rounded,
                 size: 80,
                 color: AppColors.primary,
               ),
               const SizedBox(height: 32),
 
-              // Title
-              Text(
-                'Welcome Back',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.displayLarge,
+              // Full Name
+              TextField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Full Name',
+                  prefixIcon: Icon(Icons.person_outline),
+                ),
+                textCapitalization: TextCapitalization.words,
               ),
-              const SizedBox(height: 8),
-              Text(
-                'Sign in to your account',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              const SizedBox(height: 48),
+              const SizedBox(height: 16),
 
-              // Email Input
+              // Email
               TextField(
                 controller: _emailController,
                 decoration: const InputDecoration(
@@ -57,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Password Input
+              // Password
               TextField(
                 controller: _passwordController,
                 obscureText: !_isPasswordVisible,
@@ -78,42 +76,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
-
-              // Login Button
-              ElevatedButton(
-                onPressed: () {
-                  // TODO: Implement login logic
-                },
-                child: const Text('Login'),
-              ),
               const SizedBox(height: 16),
 
-              // Register Link
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegisterScreen(),
-                    ),
-                  );
-                },
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Don\'t have an account? ',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    children: [
-                      TextSpan(
-                        text: 'Sign Up',
-                        style: TextStyle(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
+              // Confirm Password
+              TextField(
+                controller: _confirmPasswordController,
+                obscureText: !_isPasswordVisible,
+                decoration: const InputDecoration(
+                  labelText: 'Confirm Password',
+                  prefixIcon: Icon(Icons.check_circle_outline),
                 ),
+              ),
+              const SizedBox(height: 24),
+
+              // Register Button
+              ElevatedButton(
+                onPressed: () {
+                  // TODO: Implement registration logic
+                },
+                child: const Text('Sign Up'),
               ),
             ],
           ),
