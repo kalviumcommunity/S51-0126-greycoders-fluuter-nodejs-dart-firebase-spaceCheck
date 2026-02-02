@@ -8,6 +8,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  static const String _welcomeMessage = 'Hello, Resident!';
   // State variable to toggle
   bool _isActive = false;
   Color _iconColor = Colors.blue;
@@ -32,22 +33,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             // Title
             const Text(
-              'Hello, Resident!',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              _welcomeMessage,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
-            
+
             // Image/Icon
-            Icon(
-              Icons.home_work_rounded,
-              size: 100,
-              color: _iconColor,
-            ),
+            Icon(Icons.home_work_rounded, size: 100, color: _iconColor),
             const SizedBox(height: 20),
-            
+
             // State display
             Text(
               _isActive ? 'Status: Active' : 'Status: Inactive',
@@ -57,7 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
             const SizedBox(height: 40),
-            
+
             // Interaction Button
             Tooltip(
               message: 'Click to change status',
@@ -66,7 +60,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 icon: const Icon(Icons.touch_app),
                 label: const Text('Toggle Status'),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 15,
+                  ),
                 ),
               ),
             ),
