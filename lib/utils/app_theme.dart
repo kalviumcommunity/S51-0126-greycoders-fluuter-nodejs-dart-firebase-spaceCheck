@@ -142,6 +142,22 @@ class AppTheme {
           return null; // Use default
         }),
       ),
+
+      // Switch Theme
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.primary;
+          }
+          return null; // Use default
+        }),
+        trackColor: MaterialStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(MaterialState.selected)) {
+            return AppColors.primary.withOpacity(0.5);
+          }
+          return null; // Use default
+        }),
+      ),
     );
   }
 }
