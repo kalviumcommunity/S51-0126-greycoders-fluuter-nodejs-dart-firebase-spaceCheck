@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "417006349460",
+    "project_id": "spacecheck-51",
+    "storage_bucket": "spacecheck-51.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417006349460:android:b0082690594cbd0691d881",
+        "android_client_info": {
+          "package_name": "com.example.grey_scaler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417006349460-hr6bts4lmiurl1p1krp33tbal5jsfst0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo4-sYoG3WqcZMoyVGmg-ITxUwe4d_Msw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417006349460-hr6bts4lmiurl1p1krp33tbal5jsfst0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
