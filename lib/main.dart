@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart'; // Needed to check if running on Web (kIsWeb)
-
+import 'utils/app_theme.dart';
 import 'login_screen.dart'; 
 
 void main() async {
@@ -36,12 +36,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Removes the "Debug" banner
-      title: 'Resident Space App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
-      home: LoginScreen(), 
+      title: 'Community Space Check',
+      theme: AppTheme.darkTheme,
+      home: const LoginScreen(), 
     );
   }
 }
