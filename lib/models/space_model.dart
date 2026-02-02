@@ -10,6 +10,8 @@ class SpaceModel {
   final String? openTime; // "05:00"
   final String? closeTime; // "22:00"
   final DateTime? lastUpdatedAt;
+  final int currentOccupancy;
+  final int maxCapacity;
 
   SpaceModel({
     required this.id,
@@ -21,6 +23,8 @@ class SpaceModel {
     this.openTime,
     this.closeTime,
     this.lastUpdatedAt,
+    this.currentOccupancy = 0,
+    this.maxCapacity = 20,
   });
 
   // Factory to read from Firestore
@@ -40,6 +44,8 @@ class SpaceModel {
       lastUpdatedAt: data['lastUpdatedAt'] != null
           ? (data['lastUpdatedAt'] as Timestamp).toDate()
           : null,
+      currentOccupancy: data['currentOccupancy'] ?? 0,
+      maxCapacity: data['maxCapacity'] ?? 20,
     );
   }
 
@@ -54,6 +60,8 @@ class SpaceModel {
       'openTime': openTime,
       'closeTime': closeTime,
       'lastUpdatedAt': lastUpdatedAt ?? FieldValue.serverTimestamp(),
+      'currentOccupancy': currentOccupancy,
+      'maxCapacity': maxCapacity,
     };
   }
 }
