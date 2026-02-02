@@ -69,6 +69,53 @@ class DatabaseService {
     });
   }
 
+  // Check Out Transaction
+  Future<void> checkOut(String spaceId, String userId) async {
+    return _db.runTransaction((transaction) async {
+      DocumentReference spaceRef = spacesCollection.doc(spaceId);
+      DocumentSnapshot spaceSnapshot = await transaction.get(spaceRef);
+
+      if (!spaceSnapshot.exists) {
+        throw Exception("Space does not exist!");
+      }
+
+      SpaceModel space = SpaceModel.fromFirestore(spaceSnapshot);
+
+      if (space.currentOccupancy <= 0) {
+        throw Exception("Space is already empty!");
+      }
+
+      int newOccupancy = space.currentOccupancy - 1;
+      
+      // Determine new status
+      String newStatus = space.status;
+      if (newOccupancy < space.maxCapacity && newStatus == 'occupied') {
+        newStatus = 'available';
+      }
+      if (newOccupancy == 0 && newStatus != 'closed') {
+         newStatus = 'available';
+      }
+
+      Map<String, dynamic> updates = {
+        'currentOccupancy': newOccupancy,
+        'status': newStatus,
+        'lastUpdatedAt': FieldValue.serverTimestamp(),
+      };
+
+      // If empty, clear specific fields
+      if (newOccupancy == 0) {
+        updates['occupiedBy'] = null;
+        updates['occupiedSince'] = null;
+      } else if (space.maxCapacity == 1 && space.occupiedBy == userId) {
+         // If it was a single user space, clear user
+         updates['occupiedBy'] = null;
+          updates['occupiedSince'] = null;
+      }
+
+      transaction.update(spaceRef, updates);
+    });
+  }
+
   // Create User
   Future<void> createUser({
     required String name,
